@@ -1,51 +1,125 @@
 @import "tailwindcss";
 
+/*
+  SingleTrader — Apple HIG–aligned design tokens
+  Palette: warm graphite + copper (not slate/cyan AI default)
+*/
+
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+
+    --bg: #14110f;
+    --surface: #1c1917;
+    --surface-2: #292524;
+    --surface-3: #3f3a36;
+    --border: #44403c;
+    --border-subtle: #2a2623;
+
+    --label: #fafaf9;
+    --secondary: #a8a29e;
+    --tertiary: #78716c;
+
+    --accent: #d4a574;
+    --accent-press: #c4935f;
+    --positive: #6b9b7a;
+    --negative: #c45c5c;
+    --warning: #c4a35a;
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --duration-press: 120ms;
+    --duration-ui: 200ms;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior: none;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #090d16;
-    color: #e2e8f0;
+    background-color: var(--bg);
+    color: var(--label);
     min-height: 100vh;
-    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Support for iOS PWA safe areas (notch and bottom home bar) */
-  .safe-top {
-    padding-top: env(safe-area-inset-top, 0px);
+  #root {
+    min-height: 100dvh;
   }
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  button,
+  a,
+  [role='button'] {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  @media (pointer: fine) {
+    input,
+    textarea,
+    select {
+      font-size: 0.875rem;
+    }
   }
 }
 
-/* Tabular figures for numbers, timers, prices, and stats */
-.tabular-nums {
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.tabular-nums,
+.font-mono {
   font-variant-numeric: tabular-nums;
 }
 
-.font-mono-numbers {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
+.pressable {
+  transition: transform var(--duration-press) var(--ease-out), opacity var(--duration-ui) var(--ease-out),
+    background-color var(--duration-ui) var(--ease-out);
+}
+.pressable:active {
+  transform: scale(0.97);
 }
 
-/* Custom Sleek Scrollbar */
+.group-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.hairline {
+  border-color: var(--border-subtle);
+}
+
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--border);
   border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
 }
